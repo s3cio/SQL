@@ -1,0 +1,51 @@
+dataset used: counties_and_territories.sql
+
+SCHEMA
+countries 201 rows
+name  PK  TEXT
+population  INT
+percent_one_year_change REAL
+population_change INT
+density_per_sq_km INT
+area_sq_km  INT
+net_migrants  INT
+fertility_rate  REAL
+median_age  REAL
+percent_of_world_pop  REAL
+
+
+
+///  Sample queries by AppleJ
+Which country or territory has the largest population?
+  SELECT name, MAX(population) FROM countries;
+
+Which country or territory has the smallest population?
+  SELECT name, MIN(population) FROM countries;
+
+What is the average population of all the countries?
+  SELECT COUNT(*) AS "countries", ROUND( AVG(population)) as "avg_population" 
+  FROM countries;
+
+Show a count of countries with a fertility rate over 2.
+  SELECT COUNT(*), fertility_rate FROM countries
+	GROUP BY fertility_rate
+  HAVING fertility_rate > 2;
+
+Get a count of the countries based on fertility rates.  Group by rate or grade.
+  SELECT COUNT (*), 
+	  CASE
+		  WHEN fertility_rate > 7 then "too late for intervention"
+		  WHEN fertility_rate > 6 then "unsustainable"
+		  WHEN fertility_rate > 5 then "too high"
+		  WHEN fertility_rate > 3 then "high normal"
+		  WHEN fertility_rate > 2 then "elevated normal"
+		  WHEN fertility_rate <= 2 then "normal"
+	  END "population_grade"
+  FROM countries
+  GROUP BY population_grade;
+
+Which countries have a fertility rate under 3 and above 1?
+  SELECT name, population, fertility_rate, percent_of_world_pop
+		FROM countries
+		WHERE fertility_rate < 3 
+    AND fertility_rate > 1; 
