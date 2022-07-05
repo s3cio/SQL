@@ -35,7 +35,7 @@ List the songs have "Epic" mood or released after 1990.
 	WHERE mood = "epic" 
 	OR released > 1990;
 
-List the "Epics" released after 1990 and longer then 4 mins.
+List the "Epic" released after 1990 and shorter then 4 mins.
 	SELECT title FROM songs 
 	WHERE mood = "epic" 
 	AND released > 1990 
