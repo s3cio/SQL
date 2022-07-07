@@ -21,7 +21,7 @@ INSERT INTO orders (customer_id, item, price)
     VALUES (1, "TARDIS", 1000000.00);
 
 
-
+//SKILL TASKS or DEMO//
 Come up with a query that lists the name and email of every customer followed by the item and price of orders they've made.
 SELECT c.name, c.email, o.item, o.price
 	FROM customers AS c
