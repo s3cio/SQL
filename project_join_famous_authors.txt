@@ -1,0 +1,62 @@
+CREATE TABLE authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    orgin TEXT,
+	birth_year INTEGER);
+    
+INSERT INTO authors (fullname, orgin, birth_year) VALUES ("Stephen King", "Maine",1947);
+INSERT INTO authors (fullname, orgin, birth_year) VALUES ("Ernest Hemingway", "Illinois",1899);
+INSERT INTO authors (fullname, orgin, birth_year) VALUES ("Mark Twain", "Missouri",1835);
+INSERT INTO authors (fullname, orgin, birth_year) VALUES ("Virginia Woolf", "London",1882);
+INSERT INTO authors (fullname, orgin, birth_year) VALUES ("Joanne Rowling", "England",1965);
+
+
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_id INTEGER,
+	title TEXT,
+	published INTEGER);
+    
+INSERT INTO books (author_id, title, published) VALUES (1,"The Glass Floor",1967);
+INSERT INTO books (author_id, title, published) VALUES (1,"Carrie",1973);
+INSERT INTO books (author_id, title, published) VALUES (1,"The Dark Tower - Series",1977);
+INSERT INTO books (author_id, title, published) VALUES (1,"Rage",1977);
+INSERT INTO books (author_id, title, published) VALUES (1,"The Long Walk",1979);
+INSERT INTO books (author_id, title, published) VALUES (1,"Roadwork",1981);
+INSERT INTO books (author_id, title, published) VALUES (1,"The Running Man",1982);
+
+INSERT INTO books (author_id, title, published) VALUES (2,"The Torrents of Spring",1926);
+INSERT INTO books (author_id, title, published) VALUES (2,"The Sun Also Rises",1926);
+INSERT INTO books (author_id, title, published) VALUES (2,"Men Without Women",1927);
+INSERT INTO books (author_id, title, published) VALUES (2,"A Farewell to Arms",1929);
+INSERT INTO books (author_id, title, published) VALUES (2,"A Letter from Cuba",1934);
+INSERT INTO books (author_id, title, published) VALUES (2,"Notes on the Next War",1935);
+
+INSERT INTO books (author_id, title, published) VALUES (3,"The Adventures of Tom Sawyer",1976);
+INSERT INTO books (author_id, title, published) VALUES (3,"Adventures of Huckleberry Finn",1884);
+
+INSERT INTO books (author_id, title, published) VALUES (4,"The Voyage Out",1915);
+INSERT INTO books (author_id, title, published) VALUES (4,"Mrs Dalloway",1925);
+INSERT INTO books (author_id, title, published) VALUES (4,"To the Lighthouse",1927);
+INSERT INTO books (author_id, title, published) VALUES (4,"Orlando: A Biography",1928);
+INSERT INTO books (author_id, title, published) VALUES (4,"The Waves",1931);
+INSERT INTO books (author_id, title, published) VALUES (4,"The Years",1936);
+
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Philosopher's Stone",1995);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Chamber of Secret",1998);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Prisoner of Azkaban",1999);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Goblet of Fire",2000);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Order of the Phoenix",2003);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Half-Blood Prince",2005);
+INSERT INTO books (author_id, title, published) VALUES (5,"Harry Potter and the Deathly Hallows",2007);
+
+
+Just build a quick DB with a couple tables.  Preform a JOIN with out errors.
+
+SELECT b.title, a.fullname, b.published
+	FROM books AS b
+	JOIN authors AS a
+	ON b.author_id = a.id
+	ORDER BY b.title DESC;
+	
