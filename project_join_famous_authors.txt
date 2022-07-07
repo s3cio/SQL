@@ -1,3 +1,5 @@
+//SKILL TASKS or DEMO//
+
 CREATE TABLE authors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     fullname TEXT,
