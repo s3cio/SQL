@@ -28,7 +28,6 @@ INSERT INTO songs (title, artist, mood, duration, released)
 What are all of the availiable songs?
 	SELECT title FROM songs;
 
-
 List the songs have "Epic" mood or released after 1990.
 	SELECT title FROM songs 
 	WHERE mood = "epic" 
