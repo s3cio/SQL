@@ -35,7 +35,7 @@ INSERT INTO friends (person1_id, person2_id)
 INSERT INTO friends (person1_id, person2_id)
     VALUES (2, 3);
     
-
+//SKILL TASKS or DEMO//
 Use a JOIN to display a table showing people's names with their hobbies.
 	SELECT p.fullname, h.name 
 		FROM persons AS p
