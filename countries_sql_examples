@@ -13,8 +13,7 @@ fertility_rate  REAL
 median_age  REAL
 percent_of_world_pop  REAL
 
-
-
+//SKILL TASKS or DEMO//
 ///  Sample queries by AppleJ
 Which country or territory has the largest population?
   SELECT name, MAX(population) FROM countries;
