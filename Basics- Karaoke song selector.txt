@@ -24,8 +24,7 @@ INSERT INTO songs (title, artist, mood, duration, released)
     VALUES ("Call me maybe", "Carly Rae Jepsen", "happy", 193, 2011);
     
 
----
-
+//SKILL TASKS or DEMO//
 What are all of the availiable songs?
 	SELECT title FROM songs;
 
