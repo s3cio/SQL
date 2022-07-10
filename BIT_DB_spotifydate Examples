@@ -1,0 +1,29 @@
+//  Just some queries to explore this data set.
+
+1.  Review table and some data in the new imported dataset from Kaggle.
+
+    SELECT * FROM BIT_DB.Spotifydata
+    LIMIT 10;
+
+2.  Whore the the top 5 populare artiest?
+
+    SELECT distinct artist_name, track_name FROM BIT_DB.Spotifydata
+    ORDER BY popularity DESC
+    LIMIT 5;
+    
+ 3.  What is the slowest Artist and Track with that popluarity score above 90?
+ 
+    SELECT artist_name, track_name, tempo FROM BIT_DB.Spotifydata
+    WHERE popularity >= 90
+    ORDER BY tempo
+    LIMIT 1;
+
+4.  How many seconds long are all of the BTS songs?
+
+    SELECT artist_name, track_name, duration_ms/1000 as sec_time 
+    FROM BIT_DB.Spotifydata
+    WHERE artist_name like "%BTS%";
+
+
+ 
+ 
