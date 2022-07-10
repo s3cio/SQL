@@ -22,69 +22,88 @@ BIT_DB.sql is a sample dataset for an IT/Phone shop.   Sales data.
 
 4. Which product was the cheapest one sold in January, and what was the price? For this one, you are going to use the commands distinct and MIN(). Using 'SELECT distinct' will remove duplicate rows from your results. The MIN() command will allow you to select the smallest value from the price column. This is a hard one - see if you can do it, but don't be afraid to look at the hint or answer if you need to!
 	   
-    SELECT Product, MIN(price) FROM BIT_DB.JanSales;
-    	Or
-	  SELECT distinct Product, price 
-    FROM BIT_DB.JanSales 
-    WHERE price in (SELECT min(price) FROM BIT_DB.JanSales)
-	  
-    AAA Batteries (4-pack) 2.99
+	SELECT Product, MIN(price) FROM BIT_DB.JanSales;
+	Or
+	SELECT distinct Product, price 
+	FROM BIT_DB.JanSales 
+	WHERE price in (SELECT min(price) FROM BIT_DB.JanSales);
+
+	AAA Batteries (4-pack) 2.99
     
 5. What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
  
-    SELECT sum (Quantity)*price as totals_sales, Product
-    FROM BIT_DB.JanSales
-    GROUP BY product
-    ORDER BY price DESC;
+	SELECT sum(Quantity)*price as revenue, Product
+	FROM BIT_DB.JanSales
+	GROUP BY Product
+	ORDER BY sum(Quantity)*price DESC;
+	
+	Results in longer list to show here.
 	
 6. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 
-    SELECT sum(Quantity), product, sum(quantity)*price as revenue
-    FROM BIT_DB.FebSales 
-    WHERE location = '548 Lincoln St, Seattle, WA 98101'
-    GROUP BY product
+	SELECT sum(Quantity), Product, sum(Quantity)*price as revenue
+	FROM BIT_DB.FebSales 
+	WHERE location = '548 Lincoln St, Seattle, WA 98101'
+	GROUP BY Product;
 
+	2	AA Batteries (4-pack)	7.68
+	
 7. How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
 
-    SELECT count(c.acctnum), avg(quantity*price)
-    FROM BIT_DB.FebSales f
-    LEFT JOIN BIT_DB.customers c
-    ON f.orderid=c.order_id
-    WHERE f.Quantity>2
+	SELECT count(c.acctnum), avg(quantity*price)
+	FROM BIT_DB.FebSales f
+	LEFT JOIN BIT_DB.customers c
+	ON f.orderid=c.order_id
+	WHERE f.Quantity>2;
 
+	890	4.16938177874185
 	
 8. List all the products sold in Los Angeles in February, and include how many of each were sold.
 
-    SELECT Product, Sum(Quantity) AS tot_quantity from BIT_DB.FebSales
-    WHERE location LIKE '%Los Angeles%'
-    GROUP BY Product;
+	SELECT Product, Sum(Quantity) AS tot_quantity from BIT_DB.FebSales
+	WHERE location LIKE '%Los Angeles%'
+	GROUP BY Product;
 
+	Results in longer list to show here.
+		
 9. Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
+	
 	SELECT distinct location, count (orderID)
-FROM BIT_DB.JanSales
-WHERE location LIKE '%NY%'
-GROUP BY location
-HAVING count (orderID) >2;
+	FROM BIT_DB.JanSales
+	WHERE location LIKE '%NY%'
+	GROUP BY location
+	HAVING count (orderID) >2;
+	
+	148 Elm St, New York City, NY 10001	3
+	515 Lincoln St, New York City, NY 10001	3
+	916 Pine St, New York City, NY 10001	3
+	961 Jefferson St, New York City, NY 10001	4
 
 10. How many of each type of headphone were sold in February?
 
 	SELECT sum(Quantity) as quantity, Product
 	FROM BIT_DB.FebSales
-	WHERE Procdcut like '%Headphones%'
-	GROUP BY Prodcut;
-
+	WHERE Product like '%Headphones%'
+	GROUP BY Product;
+	
 11. What was the average amount spent per account in February? (Hint: For this question, we want the average amount spent / number of accounts, not the amount spent by each account).
 
 	SELECT avg (Quantity*price) FROM BIT_DB.FebSales AS feb
 	LEFT JOIN BIT_DB.customers AS cust
 	ON feb.orderid = cust.order_id;
+	
+	1013	Apple Airpods Headphones
+	844	Bose SoundSport Headphones
+	1282	Wired Headphones
 
 12. What was the average quantity of products purchased per account in February? (Hint: just like question 3, we want the overall average, not the average for each account individually).
 
-	SELECT sum(quantify)/count(cust.acctum)
+	SELECT sum(Quantity)/count(cust.acctnum)
 	FROM BIT_DB.FebSales feb
-	LEFT JOIN BIT_DB.customer cust
+	LEFT JOIN BIT_DB.customers cust
 	ON feb.orderid=cust.order_id;
+
+	1.06851226318108
 	
 13. Which product brought in the most revenue in January and how much revenue did it bring in total?
 
@@ -93,3 +112,5 @@ HAVING count (orderID) >2;
 	GROUP BY Product
 	ORDER BY sum(Quantity*price) DESC
 	LIMIT 1;
+	
+	Macbook Pro Laptop	1700	235	399500
