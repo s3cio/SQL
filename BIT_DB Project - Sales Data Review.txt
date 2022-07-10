@@ -58,3 +58,38 @@ BIT_DB.sql is a sample dataset for an IT/Phone shop.   Sales data.
     SELECT Product, Sum(Quantity) AS tot_quantity from BIT_DB.FebSales
     WHERE location LIKE '%Los Angeles%'
     GROUP BY Product;
+
+9. Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
+	SELECT distinct location, count (orderID)
+FROM BIT_DB.JanSales
+WHERE location LIKE '%NY%'
+GROUP BY location
+HAVING count (orderID) >2;
+
+10. How many of each type of headphone were sold in February?
+
+	SELECT sum(Quantity) as quantity, Product
+	FROM BIT_DB.FebSales
+	WHERE Procdcut like '%Headphones%'
+	GROUP BY Prodcut;
+
+11. What was the average amount spent per account in February? (Hint: For this question, we want the average amount spent / number of accounts, not the amount spent by each account).
+
+	SELECT avg (Quantity*price) FROM BIT_DB.FebSales AS feb
+	LEFT JOIN BIT_DB.customers AS cust
+	ON feb.orderid = cust.order_id;
+
+12. What was the average quantity of products purchased per account in February? (Hint: just like question 3, we want the overall average, not the average for each account individually).
+
+	SELECT sum(quantify)/count(cust.acctum)
+	FROM BIT_DB.FebSales feb
+	LEFT JOIN BIT_DB.customer cust
+	ON feb.orderid=cust.order_id;
+	
+13. Which product brought in the most revenue in January and how much revenue did it bring in total?
+
+	SELECT Product, price, count(Quantity), sum(Quantity*price)
+	FROM BIT_DB.JanSales
+	GROUP BY Product
+	ORDER BY sum(Quantity*price) DESC
+	LIMIT 1;
